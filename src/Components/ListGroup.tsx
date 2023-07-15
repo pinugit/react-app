@@ -2,6 +2,7 @@ import { useState } from "react";
 interface props {
   items: string[];
   heading: string;
+  onSelectItem: (item: string) => null;
 }
 function ListGroup({ items, heading }: props) {
   const [selectedIndex, setSelectedIndex] = useState(-1);
