@@ -1,0 +1,7 @@
+.ButtonStyle {
+  background: blue;
+  font-size: 20px;
+  padding: 0.5em;
+  border-radius: 0.3em;
+  box-shadow: none;
+}
