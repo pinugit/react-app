@@ -1,20 +1,20 @@
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 
 interface props {
-  buttonText: string;
-  onButtonClick: (text: string) => void;
+  children: string;
+  buttonColor?: "primary" | "secondary" | "danger" | "close";
+  onButtonClick: () => void;
 }
-function Button({ buttonText, onButtonClick }: props) {
+function Button({ children, buttonColor = "primary", onButtonClick }: props) {
   const [clickedState, setClickedState] = useState(0);
   return (
     <button
-      className={clickedState == 0 ? "btn btn-primary" : "btn btn-success"}
+      className={"btn btn-" + buttonColor}
       onClick={() => {
-        clickedState == 0 ? setClickedState(1) : setClickedState(0);
-        onButtonClick(buttonText);
+        onButtonClick();
       }}
     >
-      {buttonText}
+      {children}
     </button>
   );
 }
