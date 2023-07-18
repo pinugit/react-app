@@ -1,34 +1,32 @@
 import { useState } from "react";
-import Alert from "./Alert";
-import Button from "./Button";
-function App() {
-  let citis = ["kankroli", "ahmedabad", "udaipur"];
-  const [alertVisibility, setAlertVisibility] = useState(false);
 
-  const handleButtonClick = (text: string) => {
-    console.log(text);
-  };
-  return (
-    <div>
-      {alertVisibility && (
-        <Alert
-          onButtonPressed={() => {
-            setAlertVisibility(false);
-          }}
-        >
-          my alert
-        </Alert>
-      )}
-      <Button
-        buttonColor="primary"
-        onButtonClick={() => {
-          setAlertVisibility(true);
-        }}
-      >
-        click me
-      </Button>
-    </div>
-  );
+function App() {
+  //   let citis = ["kankroli", "ahmedabad", "udaipur"];
+  //   const [alertVisibility, setAlertVisibility] = useState(false);
+  //   const handleButtonClick = (text: string) => {
+  //     console.log(text);
+  //   };
+  //   return (
+  //     <div>
+  //       {alertVisibility && (
+  //         <Alert
+  //           onButtonPressed={() => {
+  //             setAlertVisibility(false);
+  //           }}
+  //         >
+  //           my alert
+  //         </Alert>
+  //       )}
+  //       <Button
+  //         buttonColor="primary"
+  //         onButtonClick={() => {
+  //           setAlertVisibility(true);
+  //         }}
+  //       >
+  //         click me
+  //       </Button>
+  //     </div>
+  //   );
 }
 
 export default App;
