@@ -5,7 +5,7 @@ interface props {
   maxChar?: number;
 }
 const ExpandableText = ({ children, maxChar = 100 }: props) => {
-  const [doesShowingMore, setDoesShowingMore] = useState(true);
+  const [doesShowingMore, setDoesShowingMore] = useState(false);
   return (
     <>
       <div>
