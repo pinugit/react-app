@@ -1,11 +1,20 @@
 import { useState } from "react";
 // import ListGroup from "./Components/ListGroup";
 import Button from "./Components/Button";
+import Like from "./Components/Like";
 
 function App() {
+  const handleClick = () => {
+    console.log("clicked");
+  };
   return (
     <div>
-      <Button onButtonClick={() => null}>click me</Button>
+      <Like
+        onClickLike={() => {
+          handleClick();
+        }}
+      />
+      {/* <Button onButtonClick={() => null}>click me</Button> */}
     </div>
   );
   // let citis = ["kankroli", "ahmedabad", "udaipur"];
