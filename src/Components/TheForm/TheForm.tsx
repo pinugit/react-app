@@ -1,21 +1,24 @@
 import { z } from "zod";
 import { FieldValues, useForm } from "react-hook-form";
-import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 const scherma = z.object({
   discription: z.string().min(3),
-  amount: z.number(),
-  catagory: z.string().nonempty(),
+  amount: z.number({ invalid_type_error: "should not be empty" }),
+  catagory: z.string().nonempty("please select a catagory"),
 });
 
 type FormData = z.infer<typeof scherma>;
 
 interface props {
-  onClickSubmit: () => void;
+  onSutbmitPassDict: (dict: {
+    discription: any;
+    amount: any;
+    catagory: any;
+  }) => void;
 }
 
-const TheForm = ({ onClickSubmit }: props) => {
+const TheForm = ({ onSutbmitPassDict }: props) => {
   const {
     register,
     handleSubmit,
@@ -24,16 +27,15 @@ const TheForm = ({ onClickSubmit }: props) => {
     resolver: zodResolver(scherma),
   });
 
-  const [items, setItems] = useState({
-    discription: "",
-    ammount: 0,
-    catagory: "",
-  });
-
   const onSubmit = (data: FieldValues) => {
-    setItems({ ...items, ...data });
-    console.log({ ...data });
+    let tempDict = {
+      discription: data["discription"],
+      amount: data["amount"],
+      catagory: data["catagory"],
+    };
+    onSutbmitPassDict(tempDict);
   };
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="mb-3">
@@ -46,17 +48,23 @@ const TheForm = ({ onClickSubmit }: props) => {
           id="discription"
           className="form-control"
         />
+        {errors.discription && (
+          <p className="text-danger">{errors.discription.message}</p>
+        )}
       </div>
       <div className="mb-3">
         <label htmlFor="amount" className="form-label">
           Amount
         </label>
         <input
-          {...register("amount")}
+          {...register("amount", { valueAsNumber: true })}
           type="number"
           id="amount"
           className="form-control"
         />
+        {errors.amount && (
+          <p className="text-danger">{errors.amount.message}</p>
+        )}
       </div>
       <div className="mb-3">
         <label htmlFor="catagory" className="form-label">
@@ -73,6 +81,9 @@ const TheForm = ({ onClickSubmit }: props) => {
           <option value="utilities">Utilities</option>
           <option value="entertainment">Entertainment</option>
         </select>
+        {errors.catagory && (
+          <p className="text-danger">{errors.catagory.message}</p>
+        )}
       </div>
       <button disabled={!isValid} type="submit" className="btn btn-primary">
         Submit
