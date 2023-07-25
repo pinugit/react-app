@@ -14,7 +14,6 @@ function App() {
           itemList.push(dict);
           console.log(dict);
           console.log(itemList);
-          <Table items={itemList} />;
         }}
       />
     </div>
