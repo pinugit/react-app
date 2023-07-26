@@ -2,9 +2,9 @@ import { useState } from "react";
 import Table from "./Components/Table/Table";
 import TheForm from "./Components/TheForm/TheForm";
 type Item = {
-  discription: any;
+  description: any;
   amount: any;
-  catagory: any;
+  category: any;
 };
 function App() {
   const [listItems, setListItems] = useState<Item[]>([]);
@@ -17,9 +17,9 @@ function App() {
       />
       <Table
         items={listItems}
-        onClickDelete={(index) => {
+        onClickDelete={(item) => {
           let updatedItems = [...listItems];
-          updatedItems.splice(index, 1);
+          updatedItems.splice(updatedItems.indexOf(item), 1);
           setListItems(updatedItems);
         }}
       />

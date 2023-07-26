@@ -2,19 +2,19 @@ import { z } from "zod";
 import { FieldValues, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-const scherma = z.object({
-  discription: z.string().min(3),
+const schema = z.object({
+  description: z.string().min(3),
   amount: z.number({ invalid_type_error: "should not be empty" }),
-  catagory: z.string().nonempty("please select a catagory"),
+  category: z.string().nonempty("please select a category"),
 });
 
-type FormData = z.infer<typeof scherma>;
+type FormData = z.infer<typeof schema>;
 
 interface props {
   onSutbmitPassDict: (dict: {
-    discription: any;
+    description: any;
     amount: any;
-    catagory: any;
+    category: any;
   }) => void;
 }
 
@@ -24,19 +24,19 @@ const TheForm = ({ onSutbmitPassDict }: props) => {
     handleSubmit,
     formState: { errors, isValid },
   } = useForm<FormData>({
-    resolver: zodResolver(scherma),
+    resolver: zodResolver(schema),
   });
   interface items {
-    discription: any;
+    description: any;
     amount: any;
-    catagory: any;
+    category: any;
   }
 
   const onSubmit = (data: FieldValues) => {
     let tempDict = {
-      discription: data["discription"],
+      description: data["description"],
       amount: data["amount"],
-      catagory: data["catagory"],
+      category: data["category"],
     };
     onSutbmitPassDict(tempDict);
   };
@@ -44,17 +44,17 @@ const TheForm = ({ onSutbmitPassDict }: props) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="mb-3">
-        <label htmlFor="discription" className="form-label">
-          Discription
+        <label htmlFor="description" className="form-label">
+          Description
         </label>
         <input
-          {...register("discription")}
+          {...register("description")}
           type="text"
-          id="discription"
+          id="description"
           className="form-control"
         />
-        {errors.discription && (
-          <p className="text-danger">{errors.discription.message}</p>
+        {errors.description && (
+          <p className="text-danger">{errors.description.message}</p>
         )}
       </div>
       <div className="mb-3">
@@ -72,12 +72,12 @@ const TheForm = ({ onSutbmitPassDict }: props) => {
         )}
       </div>
       <div className="mb-3">
-        <label htmlFor="catagory" className="form-label">
-          Catagory
+        <label htmlFor="category" className="form-label">
+          Category
         </label>
         <select
-          {...register("catagory")}
-          id="catagory"
+          {...register("category")}
+          id="category"
           className="form-select"
           aria-label="Default select example"
         >
@@ -86,11 +86,15 @@ const TheForm = ({ onSutbmitPassDict }: props) => {
           <option value="utilities">Utilities</option>
           <option value="entertainment">Entertainment</option>
         </select>
-        {errors.catagory && (
-          <p className="text-danger">{errors.catagory.message}</p>
+        {errors.category && (
+          <p className="text-danger">{errors.category.message}</p>
         )}
       </div>
-      <button disabled={!isValid} type="submit" className="btn btn-primary">
+      <button
+        disabled={!isValid}
+        type="submit"
+        className="mb-3 btn btn-primary"
+      >
         Submit
       </button>
     </form>
