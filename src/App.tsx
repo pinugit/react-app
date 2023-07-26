@@ -1,19 +1,26 @@
+import { useState } from "react";
 import Table from "./Components/Table/Table";
 import TheForm from "./Components/TheForm/TheForm";
-interface items {
+type Item = {
   discription: any;
   amount: any;
   catagory: any;
-}
-let itemList: items[] = [];
+};
 function App() {
+  const [listItems, setListItems] = useState<Item[]>([]);
   return (
     <div>
       <TheForm
         onSutbmitPassDict={(dict) => {
-          itemList.push(dict);
-          console.log(dict);
-          console.log(itemList);
+          setListItems([...listItems, dict]);
+        }}
+      />
+      <Table
+        items={listItems}
+        onClickDelete={(index) => {
+          let updatedItems = [...listItems];
+          updatedItems.splice(index, 1);
+          setListItems(updatedItems);
         }}
       />
     </div>
